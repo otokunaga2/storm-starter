@@ -39,8 +39,10 @@ public class WordCountTopology {
 		Config config = new Config();
 		LocalCluster cluster = new LocalCluster();
 		cluster.submitTopology(TOPOLOGY_NAME, config, builder.createTopology());
-
-		Utils.sleep(10*1000);
+		
+		
+		
+		Thread.sleep(10000);
 		cluster.killTopology(TOPOLOGY_NAME);
 		cluster.shutdown();
 //		WordCountB

@@ -8,6 +8,8 @@ import java.util.Map;
 
 
 
+
+
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.OutputFieldsDeclarer;
@@ -49,7 +51,12 @@ public class SentenceSpout extends BaseRichSpout {
 		if (index >= sentences.length){
 			this.collector.emit(new Values(sentences[index]));
 		}
-		Utils.sleep(1);
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
