@@ -52,7 +52,7 @@ public class SentenceSpout extends BaseRichSpout {
 		if (index >= sentences.length){
 			this.collector.emit(new Values(sentences[index]));
 		}
-		Utils.sleep(10);
+		
 		
 	}
 
