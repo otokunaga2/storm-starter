@@ -13,7 +13,7 @@ public class WordCountTopology {
 	private static final String TOPOLOGY_NAME = "word-count-topology";
 	
 	
-	private static void main(String[] args) throws InterruptedException{
+	public static void main(String[] args) throws InterruptedException{
 		SentenceSpout spout = new SentenceSpout();
 		SplitSentenceBolt splitBolt = new SplitSentenceBolt();
 		WordCountBolt countBolt = new WordCountBolt();
