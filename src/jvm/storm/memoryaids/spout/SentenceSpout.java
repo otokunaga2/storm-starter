@@ -4,8 +4,8 @@ import java.util.Map;
 
 
 //import org.apache.jute.Utils;
-import org.slf4j.helpers.Util;
-import org.testng.internal.Utils;
+
+
 
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -16,6 +16,11 @@ import backtype.storm.tuple.Values;
 //import backtype.storm.utils.Utils;
 
 public class SentenceSpout extends BaseRichSpout {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private SpoutOutputCollector collector;
 	
 	private String[] sentences = {

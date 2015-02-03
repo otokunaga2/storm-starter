@@ -2,7 +2,7 @@ package storm.memoryaids.spout;
 
 import java.util.Map;
 
-import org.testng.mustache.Value;
+
 
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -13,6 +13,10 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
 public class SplitSentenceBolt extends BaseRichBolt {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private OutputCollector collector;
 	@Override
 	public void prepare(Map stormConf, TopologyContext context,
