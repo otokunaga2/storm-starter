@@ -20,6 +20,7 @@ public class WordCountTopology {
 		ReportBolt reportBolt = new ReportBolt();
 		
 		TopologyBuilder builder = new TopologyBuilder();
+		
 		builder.setSpout(SENTENCE_SPOUT_ID, spout);
 		//SentenceSpout --> SplitSentenceBolt
 		
@@ -47,7 +48,7 @@ public class WordCountTopology {
 
 	private static void waitForSeconds(int i) {
 		try {
-			Thread.sleep(i);
+			Thread.sleep(i*1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

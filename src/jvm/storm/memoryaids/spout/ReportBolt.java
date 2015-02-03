@@ -1,6 +1,7 @@
 package storm.memoryaids.spout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,7 @@ public class ReportBolt extends BaseRichBolt {
 		System.out.println("-----------------FINAL COUNTS-----------------");
 		List<String> keys = new ArrayList<String>();
 		keys.addAll(this.counts.keySet());
+		Collections.sort(keys);
 		for(String key: keys){
 			System.out.println(key + ":" + this.counts.get(key));
 		}
