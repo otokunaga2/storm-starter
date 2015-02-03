@@ -41,7 +41,7 @@ public class WordCountTopology {
 		cluster.submitTopology(TOPOLOGY_NAME, config, builder.createTopology());
 		
 		
-		Utils.sleep(5000);
+		Utils.sleep(20000);
 		
 		cluster.killTopology(TOPOLOGY_NAME);
 		cluster.shutdown();
