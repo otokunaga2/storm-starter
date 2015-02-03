@@ -4,6 +4,7 @@ import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
+import backtype.storm.utils.Utils;
 
 public class WordCountTopology {
 	private static final String SENTENCE_SPOUT_ID = "sentence-spout";
@@ -38,22 +39,22 @@ public class WordCountTopology {
 		Config config = new Config();
 		LocalCluster cluster = new LocalCluster();
 		cluster.submitTopology(TOPOLOGY_NAME, config, builder.createTopology());
-		
-		waitForSeconds(10);
+
+		Utils.sleep(10*1000);
 		cluster.killTopology(TOPOLOGY_NAME);
 		cluster.shutdown();
 //		WordCountB
 	}
 
 
-	private static void waitForSeconds(int i) {
-		try {
-			Thread.sleep(i*1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// TODO Auto-generated method stub
-		
-	}
+//	private static void waitForSeconds(int i) {
+//		try {
+//			Thread.sleep(i*1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		// TODO Auto-generated method stub
+//		
+	
 }

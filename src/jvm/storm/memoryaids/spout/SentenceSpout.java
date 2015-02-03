@@ -14,6 +14,7 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseRichSpout;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
+import backtype.storm.utils.*;
 //import backtype.storm.utils.Utils;
 
 public class SentenceSpout extends BaseRichSpout {
@@ -50,17 +51,10 @@ public class SentenceSpout extends BaseRichSpout {
 		if (index >= sentences.length){
 			index = 0;
 		}
-		waitForMills();
+		Utils.sleep(1);
 		
 	}
-	private static void waitForMills(){
-		try {
-			Thread.sleep(1);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
