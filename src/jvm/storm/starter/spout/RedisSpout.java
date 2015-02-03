@@ -15,6 +15,7 @@ import javax.swing.JEditorPane;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisSpout extends BaseRichSpout {
   SpoutOutputCollector _collector;
@@ -30,7 +31,7 @@ public class RedisSpout extends BaseRichSpout {
   @Override
   public void nextTuple() {
 	String poobar; 
-	JedisPool pool = null;
+	JedisPool pool = new JedisPool(new JedisPoolConfig(),"192.168.100.177");
 	Jedis jedis = pool.getResource();
 	try{
 		poobar = jedis.get("tokunaga");
