@@ -49,12 +49,12 @@ public class SentenceSpout extends BaseRichSpout {
 
 	@Override
 	public void nextTuple() {
-		Utils.sleep(100);
+		
 		// TODO Auto-generated method stub
 		if (index >= sentences.length){
 			this.collector.emit(new Values(sentences[index]));
 		}
-		
+		Utils.sleep(1);
 		
 	}
 
