@@ -53,6 +53,7 @@ public class SentenceSpout extends BaseRichSpout {
 		// TODO Auto-generated method stub
 		if (index < sentences.length){
 			this.collector.emit(new Values(sentences[index]));
+			index++;
 		}
 		Utils.sleep(1);
 		
