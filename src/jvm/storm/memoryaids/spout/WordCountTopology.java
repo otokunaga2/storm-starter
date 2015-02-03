@@ -22,16 +22,16 @@ public class WordCountTopology {
 		
 		TopologyBuilder builder = new TopologyBuilder();
 		
-		builder.setSpout(SENTENCE_SPOUT_ID, spout, 2);
+		builder.setSpout(SENTENCE_SPOUT_ID, spout);
 		//SentenceSpout --> SplitSentenceBolt
 		
-		builder.setBolt(SPLIT_BOLT_ID, splitBolt, 2).setNumTasks(4).shuffleGrouping(SENTENCE_SPOUT_ID);
+		builder.setBolt(SPLIT_BOLT_ID, splitBolt).shuffleGrouping(SENTENCE_SPOUT_ID);
 		//SpliteSentenceBolt --> WordCountBolt
 		
 //		builder.setBolt(COUNT_BOLT_ID,countBolt, 4).fieldsGrouping(SPLIT_BOLT_ID, new Fields("word"));
-		builder.setBolt(COUNT_BOLT_ID,countBolt, 4).shuffleGrouping(SPLIT_BOLT_ID);
+		builder.setBolt(COUNT_BOLT_ID,countBolt).fieldsGrouping(SPLIT_BOLT_ID, new Fields("word"));
 		
-		//WorrdCOuntBolt --> REportBolt
+		//WorrdCOuntBolt --> RrportBolt
 		
 		
 		builder.setBolt(REPORT_BOLT_ID,reportBolt).globalGrouping(COUNT_BOLT_ID);
