@@ -42,7 +42,7 @@ public class WordCountTopology {
 		
 		
 		
-		Thread.sleep(10000);
+		Thread.sleep(100000);
 		cluster.killTopology(TOPOLOGY_NAME);
 		cluster.shutdown();
 //		WordCountB
