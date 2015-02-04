@@ -32,9 +32,9 @@ public class WordSpout implements IRichSpout{
 		// TODO Auto-generated method stub
 		this.context = context;
 		try {
-			System.out.println("---------debug--------------");
-			System.out.println(conf.get("wordsFile").toString());
-			this.fileReader = new FileReader(conf.get("wordsFile").toString());
+//			System.out.println("---------debug--------------");
+//			System.out.println(conf.get("wordsFile").toString());
+//			this.fileReader = new FileReader(conf.get("wordsFile").toString());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException("Error reading file ["+conf.get("wordsFile")+"]");
