@@ -41,6 +41,7 @@ public class WordCountTopology {
 		Config config = new Config();
 		config.put("wordsFile", args[0]);
 		LocalCluster cluster = new LocalCluster();
+		config.put(Config.TOPOLOGY_MAX_SPOUT_PENDING,1);
 		cluster.submitTopology(TOPOLOGY_NAME, config, builder.createTopology());
 		
 		
