@@ -1,6 +1,8 @@
 package storm.starter.trident;
 
-import java.util.logging.Logger;
+
+
+import org.slf4j.Logger;
 
 import clojure.tools.logging.impl.LoggerFactory;
 import backtype.storm.Config;
@@ -10,8 +12,10 @@ import backtype.storm.StormSubmitter;
 import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
+import storm.starter.spout.DiagnosisEvent;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
+import storm.trident.operation.BaseFilter;
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;
 import storm.trident.operation.builtin.Count;
@@ -23,12 +27,13 @@ import storm.trident.testing.MemoryMapState;
 import storm.trident.tuple.TridentTuple;
 
 
-public class DiseaseFilter {
-  private static final long serialVersionUid = 1L;
-
-	
-	
-  public static class Split extends BaseFunction {
+public class DiseaseFilter extends BaseFilter{
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = org.slf4j.LoggerFactory.getLogger(DiseaseFilter.class);
+public static class Split extends BaseFunction {
     @Override
     public void execute(TridentTuple tuple, TridentCollector collector) {
       String sentence = tuple.getString(0);
@@ -38,38 +43,18 @@ public class DiseaseFilter {
     }
   }
 
-  public static StormTopology buildTopology(LocalDRPC drpc) {
-    FixedBatchSpout spout = new FixedBatchSpout(new Fields("sentence"), 3, new Values("the cow jumped over the moon"),
-        new Values("the man went to the store and bought some candy"), new Values("four score and seven years ago"),
-        new Values("how many apples can you eat"), new Values("to be or not to be the person"));
-    spout.setCycle(true);
 
-    TridentTopology topology = new TridentTopology();
-    TridentState wordCounts = topology.newStream("spout1", spout).parallelismHint(16).each(new Fields("sentence"),
-        new Split(), new Fields("word")).groupBy(new Fields("word")).persistentAggregate(new MemoryMapState.Factory(),
-        new Count(), new Fields("count")).parallelismHint(16);
+@Override
+public boolean isKeep(TridentTuple tuple) {
+	DiagnosisEvent diagnosis = (DiagnosisEvent) tuple.getValue(0);
+	Integer code = Integer.parseInt(diagnosis.diagnosisCode);
+	if(code.intValue() <= 322){
+		LOG.debug("Emitting disease [" + diagnosis.diagnosisCode +"]");
+		return true;
+	}else{
+		LOG.debug("Filtering disease [" + diagnosis.diagnosisCode +"]");
+		return false;
+	}
+}
 
-    topology.newDRPCStream("words", drpc).each(new Fields("args"), new Split(), new Fields("word")).groupBy(new Fields(
-        "word")).stateQuery(wordCounts, new Fields("word"), new MapGet(), new Fields("count")).each(new Fields("count"),
-        new FilterNull()).aggregate(new Fields("count"), new Sum(), new Fields("sum"));
-    return topology.build();
-  }
-
-  public static void main(String[] args) throws Exception {
-    Config conf = new Config();
-    conf.setMaxSpoutPending(20);
-    if (args.length == 0) {
-      LocalDRPC drpc = new LocalDRPC();
-      LocalCluster cluster = new LocalCluster();
-      cluster.submitTopology("wordCounter", conf, buildTopology(drpc));
-      for (int i = 0; i < 100; i++) {
-        System.out.println("DRPC RESULT: " + drpc.execute("words", "cat the dog jumped"));
-        Thread.sleep(1000);
-      }
-    }
-    else {
-      conf.setNumWorkers(3);
-      StormSubmitter.submitTopology(args[0], conf, buildTopology(null));
-    }
-  }
 }
