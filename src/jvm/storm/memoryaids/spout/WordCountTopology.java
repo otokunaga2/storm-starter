@@ -39,6 +39,7 @@ public class WordCountTopology {
 		builder.setBolt(REPORT_BOLT_ID,reportBolt).globalGrouping(COUNT_BOLT_ID);
 		
 		Config config = new Config();
+		config.put("wordsFile", args[0]);
 		LocalCluster cluster = new LocalCluster();
 		cluster.submitTopology(TOPOLOGY_NAME, config, builder.createTopology());
 		
