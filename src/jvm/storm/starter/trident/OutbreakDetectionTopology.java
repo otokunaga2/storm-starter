@@ -37,8 +37,8 @@ public class OutbreakDetectionTopology {
 		.each(new Fields("event"), new DiseaseFilter())
 			.each(new Fields("event"),new CityAssignment(), new Fields("city"))
 			.each(new Fields("event","city"), new HourAssignment(), new Fields("hour","cityDiseaseHour"))
-			.persistentAggregate(new OutbreakTrendFactory(), new Count(), new Fields("count"))
-			.newValuesStream()
+			.groupBy(new Fields("cityDiseaseHour"))
+			.persistentAggregate(new OutbreakTrendFactory(), new Count(), new Fields("count")).newValuesStream()
 			.each(new Fields("cityDiseaseHour","count"),
 					new OutbreakDetector(), new Fields("alert"))
 			.each(new Fields("alert"), new DispatchAlert(), new Fields());
