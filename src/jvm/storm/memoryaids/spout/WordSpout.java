@@ -38,6 +38,8 @@ public class WordSpout implements IRichSpout{
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException("Error reading file ["+conf.get("wordsFile")+"]");
+		} catch(NullPointerException e){
+			System.out.println("File path"+conf.get("wordsFile").toString());
 		}
 	}
 
