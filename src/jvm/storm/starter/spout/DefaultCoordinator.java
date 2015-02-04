@@ -3,14 +3,16 @@ package storm.starter.spout;
 
 
 
+import java.io.Serializable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.esotericsoftware.minlog.Log;
+
 
 import storm.trident.spout.ITridentSpout.BatchCoordinator;
 
-public class DefaultCoordinator implements BatchCoordinator<Long> {
+public class DefaultCoordinator implements BatchCoordinator<Long>,Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = LoggerFactory.getLogger(DefaultCoordinator.class);
