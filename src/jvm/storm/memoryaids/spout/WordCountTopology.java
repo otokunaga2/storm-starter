@@ -15,7 +15,8 @@ public class WordCountTopology {
 	
 	
 	public static void main(String[] args) throws InterruptedException{
-		SentenceSpout spout = new SentenceSpout();
+		
+		WordSpout spout = new WordSpout();
 		SplitSentenceBolt splitBolt = new SplitSentenceBolt();
 		WordCountBolt countBolt = new WordCountBolt();
 		ReportBolt reportBolt = new ReportBolt();
