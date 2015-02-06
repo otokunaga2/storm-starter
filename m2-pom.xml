@@ -122,6 +122,12 @@
 	   	<artifactId>kafka-spout</artifactId>
 			<version>0.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+				<artifactId>curator-framework</artifactId>
+					<version>2.6.0</version>
+		</dependency>
+
 
   </dependencies>
 
