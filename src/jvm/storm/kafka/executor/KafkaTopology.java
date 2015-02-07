@@ -2,14 +2,14 @@ package storm.kafka.executor;
 
 import java.util.Properties;
 
-import org.apache.kafka.common.protocol.types.Field;
+
 
 import backtype.storm.Config;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.AlreadyAliveException;
 import backtype.storm.generated.InvalidTopologyException;
 import backtype.storm.spout.SchemeAsMultiScheme;
-import backtype.storm.topology.IRichSpout;
+
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
