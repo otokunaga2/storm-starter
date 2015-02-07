@@ -101,7 +101,7 @@
      </exclusions>
     </dependency>
 
-    <dependency>
+   <!-- <dependency>
       <groupId>com.yammer.metrics</groupId>
       <artifactId>metrics-core</artifactId>
       <version>2.2.0</version>
@@ -126,7 +126,7 @@
 			<groupId>org.apache.curator</groupId>
 				<artifactId>curator-framework</artifactId>
 					<version>2.6.0</version>
-		</dependency>
+		</dependency> -->
 
 
   </dependencies>
