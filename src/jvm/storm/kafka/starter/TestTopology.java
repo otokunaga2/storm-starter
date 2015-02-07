@@ -45,12 +45,17 @@ public class TestTopology {
 	        props.put("serializer.class", "kafka.serializer.StringEncoder");
 	        conf.put(TridentKafkaState.KAFKA_BROKER_PROPERTIES, props);
 
-	        try {
-				StormSubmitter.submitTopology("kafkaboltTest", conf, builder.createTopology());
-			} catch (AlreadyAliveException | InvalidTopologyException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	        
+				try {
+					StormSubmitter.submitTopology("kafkaboltTest", conf, builder.createTopology());
+				} catch (AlreadyAliveException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvalidTopologyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
 		
 		
 	}

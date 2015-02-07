@@ -68,12 +68,17 @@ public class KafkaTopology {
 	        props.put("request.required.acks", "1");
 	        props.put("serializer.class", "kafka.serializer.StringEncoder");
 	        conf.put(TridentKafkaState.KAFKA_BROKER_PROPERTIES, props);
-	        try {
-				StormSubmitter.submitTopology("kafkaTridentTest", conf, topology.build());
-			} catch (AlreadyAliveException | InvalidTopologyException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	        
+				try {
+					StormSubmitter.submitTopology("kafkaTridentTest", conf, topology.build());
+				} catch (AlreadyAliveException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvalidTopologyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
 //    spout.setCycle(true);
 //    builder.setSpout("spout", spout, 5);
 //    KafkaBolt bolt = new KafkaBolt()
